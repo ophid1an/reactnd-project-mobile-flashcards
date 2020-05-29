@@ -1,0 +1,5 @@
+export const lavender = '#7c7287ff'
+export const opal = '#9dc0bcff'
+export const mint = '#b2edc5ff'
+export const blue = '#4059adff'
+export const cadet = '#56a3a6ff'
