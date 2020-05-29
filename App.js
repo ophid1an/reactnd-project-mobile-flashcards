@@ -4,7 +4,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { View, StatusBar } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
+import reducer from './reducers'
 import { blue } from './utils/colors';
 import DecksList from './components/DecksList'
 import Deck from './components/Deck'
@@ -32,20 +35,23 @@ const TabNavigator = () => {
 
 const Stack = createStackNavigator();
 
+const store = createStore(reducer)
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <View style={{flex: 1}}>
-        <StatusBar />
-        <Stack.Navigator>
-          <Stack.Screen name="TabNavigator" component={TabNavigator} 
-            options={{headerShown: false}} 
-          />
-          <Stack.Screen name="Deck" component={Deck} />
-        </Stack.Navigator>
-      </View>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <View style={{flex: 1}}>
+          <StatusBar />
+          <Stack.Navigator>
+            <Stack.Screen name="TabNavigator" component={TabNavigator} 
+              options={{headerShown: false}} 
+            />
+            <Stack.Screen name="Deck" component={Deck} />
+          </Stack.Navigator>
+        </View>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
