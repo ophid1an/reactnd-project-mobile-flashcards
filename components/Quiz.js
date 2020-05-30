@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import TextButton from './TextButton'
 import { opal, lavender, cadet, mint } from '../utils/colors'
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
 const Quiz = ({ navigation, deck }) => {
   const [index, setIndex] = useState(0)
@@ -27,6 +28,8 @@ const Quiz = ({ navigation, deck }) => {
     if (index < cardsCnt - 1) {
       setIndex(index + 1)
     } else {
+      clearLocalNotification()
+        .then(setLocalNotification)
       setFinished(true)
     }
   }

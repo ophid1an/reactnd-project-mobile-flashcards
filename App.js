@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { View, StatusBar } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -14,7 +14,7 @@ import Deck from './components/Deck'
 import NewDeck from './components/NewDeck'
 import NewQuestion from './components/NewQuestion'
 import Quiz from './components/Quiz'
-
+import { setLocalNotification } from './utils/helpers'
 
 const Tab = createMaterialTopTabNavigator();
 const TabNavigator = () => {
@@ -40,6 +40,10 @@ const Stack = createStackNavigator();
 const store = createStore(reducer)
 
 export default function App() {
+  useEffect(() => {
+    setLocalNotification()
+  }, [])
+  
   return (
     <Provider store={store}>
       <NavigationContainer>
