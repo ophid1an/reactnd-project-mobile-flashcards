@@ -33,6 +33,8 @@ export function saveDeckTitle(title) {
           },
         }))
       }
+
+      throw new Error('Deck already exists.')
     })
 }
 

@@ -40,21 +40,21 @@ const Deck = ({ dispatch, navigation, deck }) => {
       </View>
       <View>
         <View style={[styles.btnContainer, styles.addCardBtnContainer]}>
-          <TextButton style={[styles.btn, {color: 'black'}]}
+          <TextButton style={{color: 'black'}}
             onPress={handleAddCard(deck.title)}
           >
             Add Card
           </TextButton>
         </View>
         <View style={[styles.btnContainer, styles.startQuizBtnContainer]}>
-          <TextButton style={[styles.btn, {color: 'white'}]}
+          <TextButton style={{color: 'white'}}
             onPress={handleStartQuiz}
           >
             Start Quiz
           </TextButton>
         </View>
         <View style={styles.btnContainer}>
-          <TextButton style={styles.btn}
+          <TextButton
             onPress={handleDeleteDeck}
           >
             Delete Deck
@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around',
     paddingTop: 20,
+    paddingHorizontal: 5,
     alignItems: 'center',
     backgroundColor: opal,
   },
@@ -84,9 +85,6 @@ const styles = StyleSheet.create({
   },
   startQuizBtnContainer: {
     backgroundColor: lavender
-  },
-  btn: {
-    fontSize: 18,
   },
 })
 
