@@ -1,11 +1,15 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
+
 import DeckDetails from './DeckDetails'
 import { cadet } from '../utils/colors'
 
 const DecksListItem = ({ deck }) => {
+  const navigation = useNavigation();
+  
   const onPress = (title) => {
-    console.log('Pressed! Title: ', title)
+    navigation.navigate('Deck', {title})
   }
 
   const cardsCnt = deck.questions.length

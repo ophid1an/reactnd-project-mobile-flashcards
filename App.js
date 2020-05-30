@@ -43,11 +43,22 @@ export default function App() {
       <NavigationContainer>
         <View style={{flex: 1}}>
           <StatusBar />
-          <Stack.Navigator>
+          <Stack.Navigator
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: blue,
+              },
+              headerTitleAlign: 'center',
+            }}
+          >
             <Stack.Screen name="TabNavigator" component={TabNavigator} 
               options={{headerShown: false}} 
             />
-            <Stack.Screen name="Deck" component={Deck} />
+            <Stack.Screen name="Deck" component={Deck} 
+              options={({ route }) => ({
+                 title: route.params.title
+              })}
+            />
           </Stack.Navigator>
         </View>
       </NavigationContainer>

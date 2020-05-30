@@ -1,9 +1,35 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
+import { connect } from 'react-redux'
+
 import DeckDetails from './DeckDetails'
 import TextButton from './TextButton'
+import { deleteDeck } from '../utils/api'
+import { removeDeck } from '../actions'
+import { opal, lavender, cadet } from '../utils/colors'
 
-const Deck = ({ deck }) => {
+const Deck = ({ dispatch, navigation, deck }) => {
+  const handleAddCard = title => card => {
+    // TODO
+  }
+
+  const handleStartQuiz = () => {
+    // TODO
+    console.log('Starting quick with deck.title ', deck.title)
+  }
+
+  const handleDeleteDeck = () => {
+    const { title } = deck
+
+    deleteDeck(title)
+    dispatch(removeDeck(title))
+    navigation.goBack()
+  }
+
+  if (!deck) {
+    return <View style={styles.container} />
+  }
+
   return (
     <View style={styles.container}>
       <View>
@@ -14,17 +40,23 @@ const Deck = ({ deck }) => {
       </View>
       <View>
         <View style={[styles.btnContainer, styles.addCardBtnContainer]}>
-          <TextButton style={[styles.btn, {color: 'black'}]}>
+          <TextButton style={[styles.btn, {color: 'black'}]}
+            onPress={handleAddCard(deck.title)}
+          >
             Add Card
           </TextButton>
         </View>
         <View style={[styles.btnContainer, styles.startQuizBtnContainer]}>
-          <TextButton style={[styles.btn, {color: 'white'}]}>
+          <TextButton style={[styles.btn, {color: 'white'}]}
+            onPress={handleStartQuiz}
+          >
             Start Quiz
           </TextButton>
         </View>
         <View style={styles.btnContainer}>
-          <TextButton style={styles.btn}>
+          <TextButton style={styles.btn}
+            onPress={handleDeleteDeck}
+          >
             Delete Deck
           </TextButton>
         </View>
@@ -37,6 +69,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-around',
+    paddingTop: 20,
+    alignItems: 'center',
+    backgroundColor: opal,
   },
   btnContainer: {
     padding: 10,
@@ -45,16 +80,22 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   addCardBtnContainer: {
-    borderWidth: 1,
-    borderColor: 'black',
-    backgroundColor: 'white'
+    backgroundColor: cadet
   },
   startQuizBtnContainer: {
-    backgroundColor: 'black'
+    backgroundColor: lavender
   },
   btn: {
     fontSize: 18,
   },
 })
 
-export default Deck
+const mapStateToProps = (decks, { route }) => {
+  const { title } = route.params
+
+  return {
+    deck: decks[title],
+  }
+}
+
+export default connect(mapStateToProps)(Deck)
