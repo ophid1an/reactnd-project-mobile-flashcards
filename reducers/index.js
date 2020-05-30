@@ -10,7 +10,13 @@ export default (state = {}, action) => {
   case RECEIVE_DECKS:
     return { ...state, ...action.decks }
   case ADD_DECK:
-    return { ...state, ...action.deck }
+    return { 
+      ...state, 
+      [action.title]: {
+        title: action.title,
+        questions: [],
+      }
+    }
   case REMOVE_DECK:
     const { [action.title]: value, ...rest } = state;
     return rest
