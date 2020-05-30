@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FlatList, View, StyleSheet } from 'react-native'
+import { connect } from 'react-redux'
+
+import { getDecks } from '../utils/api'
+import { receiveDecks } from '../actions'
 import DecksListItem from './DecksListItem'
-import decks from '../utils/_decks'
 import { opal } from '../utils/colors'
 
-const DecksList = () => {
+const DecksList = ({ dispatch, decks }) => {
+  useEffect(() => {
+    getDecks()
+      .then(decks => dispatch(receiveDecks(decks)))
+  }, [])
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -25,5 +33,8 @@ const styles = StyleSheet.create({
   },
 })
 
+const mapStateToProps = (decks) => ({
+  decks
+})
 
-export default DecksList
+export default connect(mapStateToProps)(DecksList)
