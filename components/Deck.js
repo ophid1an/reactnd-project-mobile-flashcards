@@ -14,9 +14,11 @@ const Deck = ({ dispatch, navigation, deck }) => {
     navigation.navigate('NewQuestion', { title })
   }
 
+  const canStartQuiz = () => deck.questions.length > 0
+
   const handleStartQuiz = () => {
-    // TODO
-    console.log('Starting quick with deck.title ', deck.title)
+    const { title } = deck
+    navigation.navigate('Quiz', { title })
   }
 
   const handleDeleteDeck = () => {
@@ -47,13 +49,13 @@ const Deck = ({ dispatch, navigation, deck }) => {
             Add Card
           </TextButton>
         </View>
-        <View style={[styles.btnContainer, styles.startQuizBtnContainer]}>
+        {canStartQuiz() && <View style={[styles.btnContainer, styles.startQuizBtnContainer]}>
           <TextButton style={{color: 'white'}}
             onPress={handleStartQuiz}
           >
             Start Quiz
           </TextButton>
-        </View>
+        </View>}
         <View style={styles.btnContainer}>
           <TextButton
             onPress={handleDeleteDeck}

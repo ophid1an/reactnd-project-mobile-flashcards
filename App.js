@@ -13,6 +13,7 @@ import DecksList from './components/DecksList'
 import Deck from './components/Deck'
 import NewDeck from './components/NewDeck'
 import NewQuestion from './components/NewQuestion'
+import Quiz from './components/Quiz'
 
 
 const Tab = createMaterialTopTabNavigator();
@@ -62,6 +63,11 @@ export default function App() {
             />
             <Stack.Screen name="NewQuestion" component={NewQuestion} 
               options={{title: 'Add Card'}}
+            />
+            <Stack.Screen name="Quiz" component={Quiz} 
+              options={({ route }) => ({
+                 title: `Quiz - ${route.params.title}`
+              })}
             />
           </Stack.Navigator>
         </View>
