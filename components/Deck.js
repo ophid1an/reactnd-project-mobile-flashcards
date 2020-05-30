@@ -9,8 +9,9 @@ import { removeDeck } from '../actions'
 import { opal, lavender, cadet } from '../utils/colors'
 
 const Deck = ({ dispatch, navigation, deck }) => {
-  const handleAddCard = title => card => {
-    // TODO
+  const handleAddCard = () => {
+    const { title } = deck
+    navigation.navigate('NewQuestion', { title })
   }
 
   const handleStartQuiz = () => {
@@ -41,7 +42,7 @@ const Deck = ({ dispatch, navigation, deck }) => {
       <View>
         <View style={[styles.btnContainer, styles.addCardBtnContainer]}>
           <TextButton style={{color: 'black'}}
-            onPress={handleAddCard(deck.title)}
+            onPress={handleAddCard}
           >
             Add Card
           </TextButton>

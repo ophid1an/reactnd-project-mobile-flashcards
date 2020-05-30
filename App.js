@@ -12,6 +12,7 @@ import { blue } from './utils/colors';
 import DecksList from './components/DecksList'
 import Deck from './components/Deck'
 import NewDeck from './components/NewDeck'
+import NewQuestion from './components/NewQuestion'
 
 
 const Tab = createMaterialTopTabNavigator();
@@ -58,6 +59,9 @@ export default function App() {
               options={({ route }) => ({
                  title: route.params.title
               })}
+            />
+            <Stack.Screen name="NewQuestion" component={NewQuestion} 
+              options={{title: 'Add Card'}}
             />
           </Stack.Navigator>
         </View>
